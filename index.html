@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="description" content="CarePal - Your caring health companion for medication tracking, vitals monitoring, and wellness support with AI-powered assistance" />
+    <meta name="theme-color" content="#3b82f6" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="CarePal" />
+    <meta name="application-name" content="CarePal" />
+    <meta name="msapplication-TileColor" content="#3b82f6" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://homecareai.me/" />
+    <meta property="og:title" content="CarePal Health Companion" />
+    <meta property="og:description" content="Your caring health companion for medication tracking, vitals monitoring, and wellness support with AI-powered assistance" />
+    <meta property="og:image" content="/pwa-512x512.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://homecareai.me/" />
+    <meta property="twitter:title" content="CarePal Health Companion" />
+    <meta property="twitter:description" content="Your caring health companion for medication tracking, vitals monitoring, and wellness support with AI-powered assistance" />
+    <meta property="twitter:image" content="/pwa-512x512.png" />
+
+    <!-- PWA Icons -->
+    <link rel="apple-touch-icon" sizes="192x192" href="/pwa-192x192.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/pwa-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/pwa-512x512.png" />
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Preconnect to external services -->
+    <link rel="preconnect" href="https://api.openai.com" />
+    <link rel="preconnect" href="https://api.elevenlabs.io" />
+    
+    <title>CarePal - Your Caring Health Companion</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('🎉 SW registered: ', registration);
+              
+              // Check for updates
+              registration.addEventListener('updatefound', () => {
+                const newWorker = registration.installing;
+                if (newWorker) {
+                  newWorker.addEventListener('statechange', () => {
+                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                      // New content is available
+                      window.dispatchEvent(new CustomEvent('swUpdate'));
+                    }
+                  });
+                }
+              });
+            })
+            .catch((registrationError) => {
+              console.log('❌ SW registration failed: ', registrationError);
+            });
+        });
+      }
+
+      // Handle app shortcuts
+      if ('serviceWorker' in navigator && 'NavigationManager' in window) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tab = urlParams.get('tab');
+        const chat = urlParams.get('chat');
+        const action = urlParams.get('action');
+        
+        if (tab || chat || action) {
+          window.addEventListener('load', () => {
+            // Dispatch custom event to handle shortcuts
+            window.dispatchEvent(new CustomEvent('pwaShortcut', {
+              detail: { tab, chat, action }
+            }));
+          });
+        }
+      }
+
+      // PWA Install Prompt Enhancement
+      let deferredPrompt;
+      let installButton;
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        console.log('🎯 PWA: Install prompt available');
+        e.preventDefault();
+        deferredPrompt = e;
+        
+        // Show install button if not already installed
+        if (!window.matchMedia('(display-mode: standalone)').matches) {
+          showInstallButton();
+        }
+      });
+
+      window.addEventListener('appinstalled', () => {
+        console.log('🎉 PWA: CarePal installed successfully!');
+        deferredPrompt = null;
+        hideInstallButton();
+        
+        // Show success message
+        if (window.speechSynthesis) {
+          const utterance = new SpeechSynthesisUtterance('Wonderful! CarePal has been installed successfully. You can now access it directly from your home screen!');
+          window.speechSynthesis.speak(utterance);
+        }
+      });
+
+      function showInstallButton() {
+        // The install button is already handled by the PWAInstallPrompt component
+        // This is just for additional browser-level handling
+        console.log('📱 PWA: Install button should be visible');
+      }
+
+      function hideInstallButton() {
+        console.log('📱 PWA: Install button should be hidden');
+      }
+
+      // iOS Safari specific handling
+      function isIOS() {
+        return /iPad|iPhone|iPod/.test(navigator.userAgent);
+      }
+
+      function isInStandaloneMode() {
+        return (window.matchMedia('(display-mode: standalone)').matches) || (window.navigator.standalone) || document.referrer.includes('android-app://');
+      }
+
+      // Show iOS install instructions if needed
+      if (isIOS() && !isInStandaloneMode()) {
+        console.log('📱 iOS device detected - install instructions available');
+      }
+
+      // Handle PWA display mode changes
+      window.matchMedia('(display-mode: standalone)').addEventListener('change', (e) => {
+        if (e.matches) {
+          console.log('🎉 PWA: Now running in standalone mode');
+          document.body.classList.add('pwa-standalone');
+        } else {
+          console.log('🌐 PWA: Running in browser mode');
+          document.body.classList.remove('pwa-standalone');
+        }
+      });
+
+      // Add PWA class if already in standalone mode
+      if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+        document.body.classList.add('pwa-standalone');
+      }
+    </script>
+
+    <!-- PWA Styles for standalone mode -->
+    <style>
+      .pwa-standalone {
+        /* Add any PWA-specific styles here */
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+      
+      /* iOS Safari specific styles */
+      @supports (-webkit-touch-callout: none) {
+        .pwa-standalone {
+          padding-top: max(env(safe-area-inset-top), 20px);
+        }
+      }
+    </style>
+  </body>
+</html>
