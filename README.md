@@ -151,7 +151,8 @@ Users install **CarePal** as a Progressive Web App (PWA) on their device. Once o
 
 ## Screenshots
 
-![CarePal Dashboard]([Dashboard.png]
+![CarePal Dashboard]([CarePal Dashboard.png])
+
 
 https://www.youtube.com/watch?v=pUAProCewpU
 
