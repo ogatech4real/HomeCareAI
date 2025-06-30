@@ -150,7 +150,7 @@ CarePal was developed using [Bolt.new], combining AI tools, and cloud infrastruc
    ```
 3. Configure environment variables:
 
-   * `VITE_MONGODB_URI`
+   * `VITE_SUPERBASE_URI`
    * `VITE_OPENAI_API_KEY`
    * `VITE_ELEVENLABS_API_KEY`
 4. Run the development server:
@@ -169,7 +169,7 @@ CarePal was developed using [Bolt.new], combining AI tools, and cloud infrastruc
 
 ## Screenshots
 
-https://youtu.be/wiGi4HNjEgo
+https://youtu.be/E0M66u5qdgA
 
 ---
 
