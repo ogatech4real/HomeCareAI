@@ -1,6 +1,6 @@
 # CarePal Health Companion
 
-Your intelligent, caring health partner designed to make wellness simple, accessible, and personal.
+Your intelligent, caring health partner is designed to make wellness simple, accessible, and personal.
 
 ---
 
@@ -23,26 +23,29 @@ Your intelligent, caring health partner designed to make wellness simple, access
 
 ## Inspiration
 
-The inspiration for **HomeCare AI**, branded as **CarePal Health Companion**, came from witnessing the daily health struggles of seniors and individuals managing chronic conditions like hypertension, diabetes, and heart diseases. Many face isolation, forget medications, or delay seeking help during emergencies.
+The inspiration for **HomeCare AI**, branded as CarePal Health Companion, stemmed from witnessing the daily health challenges faced by seniors and individuals managing conditions such as hypertension, diabetes, or loneliness. Many forget medications, face health emergencies alone, or lack emotional support. 
 
-The mission was to build a compassionate digital assistant that blends healthcare support, real-time communication, and AI-powered emotional engagement—especially for people living alone or away from their caregivers.
+I wanted to build a compassionate, intelligent digital assistant blending healthcare support, real-time communication, and AI-powered engagement — especially for those living independently or away from caregivers.
 
-With an ageing global population, improving proactive care and making health management more accessible is essential.
+With a rapidly ageing global population, making proactive health management accessible is not just desirable — it's essential.
+
 
 ---
 
 ## Features
 
-* 💬 AI-powered health conversations with GPT-4 integration
-* 💊 Medication tracking with reminders and caregiver alerts
-* 📊 Health vitals monitoring with abnormal reading detection
-* 🚨 Emergency contact management with voice-triggered alerts
-* 🤖 Secure chat system connecting users, caregivers, doctors, and communities
-* 🎤 Voice-first interaction with both speech recognition and realistic text-to-speech
-* 🌐 Offline functionality with hybrid storage (local & MongoDB cloud sync)
-* 📱 Fully responsive, mobile-first PWA with installable features
-* 🎯 Personalized, senior-friendly design focused on emotional support
-* 🔒 Privacy-first architecture with encrypted local storage
+- 💬 AI-powered health conversations (OpenAI GPT-4)
+- 🎥 Real-time Tavus AI video agent (CarePal Avatar)
+- 🗣️ Natural AI speech with ElevenLabs (with fallback to browser TTS)
+- 🎤 Voice-first interaction with speech recognition commands
+- 💊 Medication tracking with smart reminders and caregiver alerts
+- 📊 Vitals monitoring (blood pressure, glucose, temperature, weight) with abnormal reading detection
+- 🚨 Emergency contacts with one-tap and voice-triggered alerts
+- 🤖 Secure chat with caregivers, doctors, and the CarePal community
+- 🌐 Works offline with hybrid storage (local + Supabase cloud sync)
+- 🎯 Accessible, senior-friendly interface with large buttons and clean design
+- 🔒 Privacy-first architecture with optional user profiles
+- 🩺 Emotional engagement with AI-powered support and progress tracking
 
 ---
 
@@ -57,6 +60,27 @@ Users install **CarePal** as a Progressive Web App (PWA) on their device. Once o
 * Use voice commands for hands-free interaction
 * Receive personalized encouragement and AI-powered health support
 * Sync data to the cloud with MongoDB or use offline with local storage
+
+---
+
+## 🛠️ How it was built
+
+CarePal was developed using [Bolt.new], combining AI tools, and cloud infrastructure:
+
+| Technology       | Purpose                                |
+|-----------------|-----------------------------------------|
+| React + TypeScript | Frontend architecture |
+| Vite + TailwindCSS | Rapid UI development |
+| Vite PWA Plugin | Full PWA capabilities, offline-ready |
+| Supabase | Scalable backend, user auth, cloud database |
+| OpenAI GPT-4 | Conversational AI chat with context |
+| Tavus AI Video | Real-time video agent integration |
+| ElevenLabs | Realistic text-to-speech voice AI |
+| SpeechRecognition API | Voice commands and interaction |
+| Socket.io | Real-time messaging for chat and community |
+| RevenueCat SDK | Subscription and monetization system *(planned)* |
+| Netlify | Full-stack hosting and deployment |
+| IONOS + Entri | Custom domain management |
 
 ---
 
@@ -76,45 +100,39 @@ Users install **CarePal** as a Progressive Web App (PWA) on their device. Once o
 
 ---
 
-## Challenges Encountered
-
-* 🔐 Secure, scalable user authentication with email verification
-* 🌐 Voice integration required extensive tuning for accessibility and accuracy
-* 🛠️ Ensuring reliable offline PWA functionality and background sync
-* 🤖 Building AI that provides contextual, empathetic responses while maintaining privacy
-* ⚙️ Email configuration for domain-based communication via `admin@homecareai.me`
-
----
-
 ## Accomplishments
 
-* ✅ Delivered a functional, installable PWA for health support
-* ✅ Integrated intelligent AI chat with real-time context handling
-* ✅ Enabled secure, role-based chat system (caregivers, doctors, community)
-* ✅ Seamlessly merged cloud and local storage for reliability
-* ✅ Designed for seniors with accessibility, large buttons, and simple navigation
-* ✅ Implemented emergency voice commands and caregiver alerts
+- ✅ Fully functional, installable health PWA for web and mobile
+- ✅ AI chat powered by OpenAI with real health context
+- ✅ Tavus AI video agent providing human-like engagement
+- ✅ Realistic ElevenLabs voice responses with fallback
+- ✅ Scalable backend with Supabase replacing MongoDB
+- ✅ Role-based secure chat for caregivers, doctors, and users
+- ✅ Accessible, senior-friendly UI with voice-first design
+- ✅ Emergency voice detection and caregiver alerts
 
 ---
 
 ## Lessons Learned
 
-* Empathy-driven design is crucial, especially for seniors and vulnerable users
-* Privacy-first development protects sensitive health data
-* PWA technology can bridge accessibility gaps for health apps
-* AI is impactful but must be aligned with real human needs
-* Robust fallback systems (offline mode, local storage) are essential for reliability
+- Empathy-first design transforms AI into meaningful health support  
+- Privacy-first architecture is critical for healthcare apps  
+- PWA tech bridges the gap between mobile accessibility and performance  
+- Voice and video interaction greatly enhance usability for seniors  
+- Cloud platforms like Supabase simplify scalability without complexity  
 
 ---
 
 ## What's Next
 
-* 📱 Wrap with **Capacitor** for native Android/iOS app deployment
-* 🌍 Enhance community features for peer support groups
-* 🗣️ Finalize ElevenLabs high-quality TTS for natural AI speech
-* 💡 Improve AI with deeper health knowledge for triage and guidance
-* 🔒 Implement advanced security (2FA, encrypted storage)
-* 🚀 Prepare for pilot programs with care providers and senior homes
+- 📱 Capacitor build for Android/iOS native apps  
+- 💰 RevenueCat subscription integration for premium features  
+- 🌍 Expanding real-time CarePal community chat and peer support  
+- 🗣️ Polishing ElevenLabs AI speech for smoother conversation  
+- 🎥 Advanced Tavus avatars with medical knowledge  
+- 💡 AI symptom triage and health insights development  
+- 🔒 Two-factor auth and encrypted health data storage  
+- 🚀 Pilot testing with healthcare providers, caregivers, and senior communities  
 
 ---
 
@@ -134,7 +152,7 @@ Users install **CarePal** as a Progressive Web App (PWA) on their device. Once o
 
    * `VITE_MONGODB_URI`
    * `VITE_OPENAI_API_KEY`
-   * `VITE_ELEVENLABS_API_KEY` (optional)
+   * `VITE_ELEVENLABS_API_KEY`
 4. Run the development server:
 
    ```bash
@@ -151,10 +169,7 @@ Users install **CarePal** as a Progressive Web App (PWA) on their device. Once o
 
 ## Screenshots
 
-![CarePal Dashboard]([CarePal Dashboard.png])
-
-
-https://www.youtube.com/watch?v=pUAProCewpU
+https://youtu.be/wiGi4HNjEgo
 
 ---
 
@@ -164,7 +179,8 @@ https://www.youtube.com/watch?v=pUAProCewpU
 👤 Health-Tech Enthusiast & AI Developer
 📧 [ogabi.adewale@gmail.com](mailto:ogabi.adewale@gmail.com)
 🔗 [LinkedIn Profile](https://www.linkedin.com/in/ogabiadewale/)
-🌍 [HomeCare AI](https://homecareai.me)
+🌍 Visit the deployed version: [https://homecareai.me](https://homecareai.me)  
+🏷️ Proudly built with [Bolt.new](https://bolt.new) | Domain powered by IONOS
 
 ---
 
